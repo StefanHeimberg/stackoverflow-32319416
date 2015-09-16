@@ -1,6 +1,5 @@
 package org.example.app.application;
 
-import com.sun.corba.se.spi.activation.Repository;
 import org.example.app.infrastructure.persistence.RepositoryTypeEnum;
 
 /*
@@ -26,6 +25,15 @@ import org.example.app.infrastructure.persistence.RepositoryTypeEnum;
 public class Settings {
     
     private RepositoryTypeEnum repositoryType;
+
+    public Settings() {
+        init();
+    }
+    
+    private void init() {
+        // Default is JDBC
+        repositoryType = RepositoryTypeEnum.JDBC;
+    }
 
     public RepositoryTypeEnum getRepositoryType() {
         return repositoryType;

@@ -30,6 +30,9 @@ public class JsonAppleRepository implements AppleRepository {
     @Override
     public Apple get(final Long appleId) {
         LOG.info("json get");
+
+        // ... read in from the appropriate json-file and map the resultset to instance of apple
+        
         return new Apple("JSON-" + appleId);
     }
 

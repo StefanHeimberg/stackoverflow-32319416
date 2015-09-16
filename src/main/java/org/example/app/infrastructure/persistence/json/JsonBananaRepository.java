@@ -30,6 +30,9 @@ public class JsonBananaRepository implements BananaRepository {
     @Override
     public Banana get(final Long bananaId) {
         LOG.info("json get");
+        
+        // ... read in from the appropriate json-file and map the resultset to instance of banana
+        
         return new Banana("JSON-" + bananaId);
     }
     

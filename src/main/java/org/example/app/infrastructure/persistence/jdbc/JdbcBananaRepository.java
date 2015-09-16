@@ -30,6 +30,9 @@ public class JdbcBananaRepository implements BananaRepository {
     @Override
     public Banana get(final Long bananaId) {
         LOG.info("jdbc get");
+        
+        // ... query the database and map the resultset to instance of banana
+        
         return new Banana("JDBC-" + bananaId);
     }
 

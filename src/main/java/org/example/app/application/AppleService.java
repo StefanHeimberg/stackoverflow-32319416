@@ -26,7 +26,7 @@ public class AppleService {
 
     private final Settings settings;
     private final AppleRepositoryFactory appleRepositoryFactory;
-
+    
     public AppleService(final Settings settings, final AppleRepositoryFactory appleRepositoryFactory) {
         this.settings = settings;
         this.appleRepositoryFactory = appleRepositoryFactory;

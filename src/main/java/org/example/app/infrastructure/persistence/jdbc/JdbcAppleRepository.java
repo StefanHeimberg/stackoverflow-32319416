@@ -30,6 +30,9 @@ public class JdbcAppleRepository implements AppleRepository {
     @Override
     public Apple get(final Long appleId) {
         LOG.info("jdbc get");
+        
+        // ... query the database and map the resultset to instance of apple
+        
         return new Apple("JDBC-" + appleId);
     }
 
