@@ -15,6 +15,7 @@
  */
 package org.example.app.domain.repository;
 
+import java.util.List;
 import org.example.app.domain.model.Banana;
 
 /**
@@ -22,7 +23,9 @@ import org.example.app.domain.model.Banana;
  * @author Stefan Heimberg <kontakt@stefanheimberg.ch>
  */
 public interface BananaRepository {
-    
+
     Banana get(Long bananaId);
-    
+
+    List<Banana> getAll();
+
 }

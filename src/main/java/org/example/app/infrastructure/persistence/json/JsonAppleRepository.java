@@ -15,6 +15,8 @@
  */
 package org.example.app.infrastructure.persistence.json;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Logger;
 import org.example.app.domain.model.Apple;
 import org.example.app.domain.repository.AppleRepository;
@@ -34,6 +36,11 @@ public class JsonAppleRepository implements AppleRepository {
         // ... read in from the appropriate json-file and map the resultset to instance of apple
         
         return new Apple("JSON-" + appleId);
+    }
+
+    @Override
+    public List<Apple> getAll() {
+        return Arrays.asList(new Apple("JSON-1"), new Apple("JSON-2"), new Apple("JSON-3"));
     }
 
 }

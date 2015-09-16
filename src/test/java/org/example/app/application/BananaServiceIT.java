@@ -42,7 +42,7 @@ public class BananaServiceIT {
     }
 
     @Test
-    public void test() {
+    public void test_findBananaById() {
         // test with jdbc
         settings.setRepositoryType(RepositoryTypeEnum.JDBC);
         assertEquals("JDBC-331", bananaService.findBananaById(331l).getMessage());
@@ -50,6 +50,17 @@ public class BananaServiceIT {
         // test with json
         settings.setRepositoryType(RepositoryTypeEnum.JSON);
         assertEquals("JSON-841", bananaService.findBananaById(841l).getMessage());
+    }
+    
+    @Test
+    public void test_getApples() {
+        // test with jdbc
+        settings.setRepositoryType(RepositoryTypeEnum.JDBC);
+        assertEquals(2, bananaService.getBananas().size());
+        
+        // test with json
+        settings.setRepositoryType(RepositoryTypeEnum.JSON);
+        assertEquals(3, bananaService.getBananas().size());
     }
 
 }

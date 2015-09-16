@@ -15,6 +15,7 @@
  */
 package org.example.app.domain.repository;
 
+import java.util.List;
 import org.example.app.domain.model.Apple;
 
 /**
@@ -24,5 +25,7 @@ import org.example.app.domain.model.Apple;
 public interface AppleRepository {
     
     Apple get(Long appleId);
+    
+    List<Apple> getAll();
     
 }

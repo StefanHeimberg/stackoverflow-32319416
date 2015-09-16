@@ -15,6 +15,8 @@
  */
 package org.example.app.infrastructure.persistence.jdbc;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Logger;
 import org.example.app.domain.model.Apple;
 import org.example.app.domain.repository.AppleRepository;
@@ -24,16 +26,20 @@ import org.example.app.domain.repository.AppleRepository;
  * @author Stefan Heimberg <kontakt@stefanheimberg.ch>
  */
 public class JdbcAppleRepository implements AppleRepository {
-    
+
     private static final Logger LOG = Logger.getLogger(JdbcAppleRepository.class.getName());
-    
+
     @Override
     public Apple get(final Long appleId) {
         LOG.info("jdbc get");
-        
+
         // ... query the database and map the resultset to instance of apple
-        
         return new Apple("JDBC-" + appleId);
+    }
+
+    @Override
+    public List<Apple> getAll() {
+        return Arrays.asList(new Apple("JDBC-1"), new Apple("JDBC-2"));
     }
 
 }

@@ -15,6 +15,8 @@
  */
 package org.example.app.infrastructure.persistence.json;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Logger;
 import org.example.app.domain.model.Banana;
 import org.example.app.domain.repository.BananaRepository;
@@ -24,16 +26,23 @@ import org.example.app.domain.repository.BananaRepository;
  * @author Stefan Heimberg <kontakt@stefanheimberg.ch>
  */
 public class JsonBananaRepository implements BananaRepository {
-    
+
     private static final Logger LOG = Logger.getLogger(JsonBananaRepository.class.getName());
-    
+
     @Override
     public Banana get(final Long bananaId) {
         LOG.info("json get");
-        
+
         // ... read in from the appropriate json-file and map the resultset to instance of banana
-        
         return new Banana("JSON-" + bananaId);
     }
-    
+
+    @Override
+    public List<Banana> getAll() {
+
+        // ... read in from the appropriate json-file and map the resultset to instance of banana
+        
+        return Arrays.asList(new Banana("JSON-1"), new Banana("JSON-2"), new Banana("JSON-3"));
+    }
+
 }

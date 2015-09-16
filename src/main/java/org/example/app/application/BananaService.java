@@ -15,6 +15,7 @@
  */
 package org.example.app.application;
 
+import java.util.List;
 import org.example.app.domain.model.Banana;
 import org.example.app.infrastructure.persistence.BananaRepositoryFactory;
 
@@ -23,7 +24,7 @@ import org.example.app.infrastructure.persistence.BananaRepositoryFactory;
  * @author Stefan Heimberg <kontakt@stefanheimberg.ch>
  */
 public class BananaService {
-    
+
     private final Settings settings;
     private final BananaRepositoryFactory bananaRepositoryFactory;
 
@@ -31,11 +32,17 @@ public class BananaService {
         this.settings = settings;
         this.bananaRepositoryFactory = bananaRepositoryFactory;
     }
-    
+
     public Banana findBananaById(final Long bananaId) {
         return bananaRepositoryFactory
                 .create(settings.getRepositoryType())
                 .get(bananaId);
     }
-    
+
+    public List<Banana> getBananas() {
+        return bananaRepositoryFactory
+                .create(settings.getRepositoryType())
+                .getAll();
+    }
+
 }

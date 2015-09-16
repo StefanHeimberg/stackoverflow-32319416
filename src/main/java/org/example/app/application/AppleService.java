@@ -15,6 +15,7 @@
  */
 package org.example.app.application;
 
+import java.util.List;
 import org.example.app.domain.model.Apple;
 import org.example.app.infrastructure.persistence.AppleRepositoryFactory;
 
@@ -36,6 +37,12 @@ public class AppleService {
         return appleRepositoryFactory
                 .create(settings.getRepositoryType())
                 .get(bananaId);
+    }
+    
+    public List<Apple> getApples() {
+        return appleRepositoryFactory
+                .create(settings.getRepositoryType())
+                .getAll();
     }
 
 }

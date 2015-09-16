@@ -42,7 +42,7 @@ public class AppleServiceIT {
     }
     
     @Test
-    public void test() {
+    public void test_findAppleById() {
         // test with jdbc
         settings.setRepositoryType(RepositoryTypeEnum.JDBC);
         assertEquals("JDBC-135", appleService.findAppleById(135l).getMessage());
@@ -50,6 +50,17 @@ public class AppleServiceIT {
         // test with json
         settings.setRepositoryType(RepositoryTypeEnum.JSON);
         assertEquals("JSON-243", appleService.findAppleById(243l).getMessage());
+    }
+    
+    @Test
+    public void test_getApples() {
+        // test with jdbc
+        settings.setRepositoryType(RepositoryTypeEnum.JDBC);
+        assertEquals(2, appleService.getApples().size());
+        
+        // test with json
+        settings.setRepositoryType(RepositoryTypeEnum.JSON);
+        assertEquals(3, appleService.getApples().size());
     }
     
 }

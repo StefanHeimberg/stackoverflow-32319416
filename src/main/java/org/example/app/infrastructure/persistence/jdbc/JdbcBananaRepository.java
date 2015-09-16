@@ -15,6 +15,8 @@
  */
 package org.example.app.infrastructure.persistence.jdbc;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Logger;
 import org.example.app.domain.model.Banana;
 import org.example.app.domain.repository.BananaRepository;
@@ -34,6 +36,14 @@ public class JdbcBananaRepository implements BananaRepository {
         // ... query the database and map the resultset to instance of banana
         
         return new Banana("JDBC-" + bananaId);
+    }
+
+    @Override
+    public List<Banana> getAll() {
+        
+        // ... query the database and map the resultset to instance of banana
+        
+        return Arrays.asList(new Banana("JDBC-1"), new Banana("JDBC-2"));
     }
 
 }
