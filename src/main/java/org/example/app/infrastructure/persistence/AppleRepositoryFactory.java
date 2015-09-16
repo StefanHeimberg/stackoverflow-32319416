@@ -25,12 +25,20 @@ import org.example.app.infrastructure.persistence.json.JsonAppleRepository;
  */
 public class AppleRepositoryFactory {
 
+    private final JdbcAppleRepository jdbcAppleRepository;
+    private final JsonAppleRepository jsonAppleRepository;
+
+    public AppleRepositoryFactory(final JdbcAppleRepository jdbcAppleRepository, final JsonAppleRepository jsonAppleRepository) {
+        this.jdbcAppleRepository = jdbcAppleRepository;
+        this.jsonAppleRepository = jsonAppleRepository;
+    }
+
     public AppleRepository create(final RepositoryTypeEnum repositoryTypeEnum) {
         switch (repositoryTypeEnum) {
             case JDBC:
-                return new JdbcAppleRepository();
+                return jdbcAppleRepository;
             case JSON:
-                return new JsonAppleRepository();
+                return jsonAppleRepository;
             default:
                 throw new RuntimeException("unknown repository type: " + repositoryTypeEnum);
         }

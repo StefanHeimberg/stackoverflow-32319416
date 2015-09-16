@@ -25,12 +25,20 @@ import org.example.app.infrastructure.persistence.json.JsonBananaRepository;
  */
 public class BananaRepositoryFactory {
 
+    private final JdbcBananaRepository jdbcBananaRepository;
+    private final JsonBananaRepository jsonBananaRepository;
+
+    public BananaRepositoryFactory(final JdbcBananaRepository jdbcBananaRepository, final JsonBananaRepository jsonBananaRepository) {
+        this.jdbcBananaRepository = jdbcBananaRepository;
+        this.jsonBananaRepository = jsonBananaRepository;
+    }
+
     public BananaRepository create(final RepositoryTypeEnum repositoryTypeEnum) {
         switch (repositoryTypeEnum) {
             case JDBC:
-                return new JdbcBananaRepository();
+                return jdbcBananaRepository;
             case JSON:
-                return new JsonBananaRepository();
+                return jsonBananaRepository;
             default:
                 throw new RuntimeException("unknown repository type: " + repositoryTypeEnum);
         }

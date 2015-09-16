@@ -15,7 +15,6 @@
  */
 package org.example.app.domain.repository;
 
-import java.util.List;
 import org.example.app.domain.model.Apple;
 
 /**

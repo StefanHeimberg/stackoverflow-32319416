@@ -15,9 +15,10 @@
  */
 package org.example.app.application;
 
-import org.example.app.infrastructure.persistence.AppleRepositoryFactory;
 import org.example.app.infrastructure.persistence.BananaRepositoryFactory;
 import org.example.app.infrastructure.persistence.RepositoryTypeEnum;
+import org.example.app.infrastructure.persistence.jdbc.JdbcBananaRepository;
+import org.example.app.infrastructure.persistence.json.JsonBananaRepository;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,25 +28,28 @@ import org.junit.Test;
  * @author Stefan Heimberg <kontakt@stefanheimberg.ch>
  */
 public class BananaServiceIT {
-    
+
     private Settings settings;
     private BananaService bananaService;
-    
+
     @Before
-    public void init() {
+    public void injectDependencies() {
         settings = new Settings();
-        bananaService = new BananaService(settings, new BananaRepositoryFactory());
+        final JdbcBananaRepository jdbcBananaRepository = new JdbcBananaRepository();
+        final JsonBananaRepository jsonBananaRepository = new JsonBananaRepository();
+        final BananaRepositoryFactory bananaRepositoryFactory = new BananaRepositoryFactory(jdbcBananaRepository, jsonBananaRepository);
+        bananaService = new BananaService(settings, bananaRepositoryFactory);
     }
-    
+
     @Test
     public void test() {
         // test with jdbc
         settings.setRepositoryType(RepositoryTypeEnum.JDBC);
-        assertEquals("JDBC", bananaService.findBananaById(Long.MIN_VALUE).getMessage());
-        
+        assertEquals("JDBC-331", bananaService.findBananaById(331l).getMessage());
+
         // test with json
         settings.setRepositoryType(RepositoryTypeEnum.JSON);
-        assertEquals("JSON", bananaService.findBananaById(Long.MIN_VALUE).getMessage());
+        assertEquals("JSON-841", bananaService.findBananaById(841l).getMessage());
     }
-    
+
 }

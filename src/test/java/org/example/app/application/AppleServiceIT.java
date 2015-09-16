@@ -17,6 +17,8 @@ package org.example.app.application;
 
 import org.example.app.infrastructure.persistence.AppleRepositoryFactory;
 import org.example.app.infrastructure.persistence.RepositoryTypeEnum;
+import org.example.app.infrastructure.persistence.jdbc.JdbcAppleRepository;
+import org.example.app.infrastructure.persistence.json.JsonAppleRepository;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,20 +33,23 @@ public class AppleServiceIT {
     private AppleService appleService;
     
     @Before
-    public void init() {
+    public void injectDependencies() {
         settings = new Settings();
-        appleService = new AppleService(settings, new AppleRepositoryFactory());
+        final JdbcAppleRepository jdbcAppleRepository = new JdbcAppleRepository();
+        final JsonAppleRepository jsonAppleRepository = new JsonAppleRepository();
+        final AppleRepositoryFactory appleRepositoryFactory = new AppleRepositoryFactory(jdbcAppleRepository, jsonAppleRepository);
+        appleService = new AppleService(settings, appleRepositoryFactory);
     }
     
     @Test
     public void test() {
         // test with jdbc
         settings.setRepositoryType(RepositoryTypeEnum.JDBC);
-        assertEquals("JDBC", appleService.findAppleById(Long.MIN_VALUE).getMessage());
+        assertEquals("JDBC-135", appleService.findAppleById(135l).getMessage());
         
         // test with json
         settings.setRepositoryType(RepositoryTypeEnum.JSON);
-        assertEquals("JSON", appleService.findAppleById(Long.MIN_VALUE).getMessage());
+        assertEquals("JSON-243", appleService.findAppleById(243l).getMessage());
     }
     
 }

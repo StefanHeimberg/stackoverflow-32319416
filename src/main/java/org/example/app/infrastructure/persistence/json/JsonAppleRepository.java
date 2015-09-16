@@ -24,13 +24,13 @@ import org.example.app.domain.repository.AppleRepository;
  * @author Stefan Heimberg <kontakt@stefanheimberg.ch>
  */
 public class JsonAppleRepository implements AppleRepository {
-    
+
     private static final Logger LOG = Logger.getLogger(JsonAppleRepository.class.getName());
 
     @Override
     public Apple get(final Long appleId) {
         LOG.info("json get");
-        return new Apple("JSON");
+        return new Apple("JSON-" + appleId);
     }
-    
+
 }
